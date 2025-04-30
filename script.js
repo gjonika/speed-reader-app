@@ -32,7 +32,7 @@ document.getElementById("resetBtn").addEventListener("click", () => {
   clearInterval(interval);
   paused = false;
   index = 0;
-  wordDisplay.textContent = "Ready?";
+  wordDisplay.innerHTML = "Ready?";
 });
 
 function startReading() {
@@ -41,9 +41,29 @@ function startReading() {
   interval = setInterval(() => {
     if (index >= words.length) {
       clearInterval(interval);
-      wordDisplay.textContent = "Done!";
+      wordDisplay.innerHTML = "Done!";
       return;
     }
-    wordDisplay.textContent = words[index++];
+    wordDisplay.innerHTML = formatWord(words[index++]);
   }, delay);
+}
+
+function formatWord(word) {
+  const len = word.length;
+  if (len === 0) return "";
+
+  let focusIndex = 0;
+  if (len <= 2) {
+    focusIndex = 0;
+  } else if (len === 3) {
+    focusIndex = 1;
+  } else {
+    focusIndex = Math.floor(len / 2 - 1);
+  }
+
+  return (
+    word.substring(0, focusIndex) +
+    `<span style="color: red;">${word.charAt(focusIndex)}</span>` +
+    word.substring(focusIndex + 1)
+  );
 }
