@@ -3,16 +3,18 @@ body {
   background: #121212;
   color: white;
   margin: 0;
+  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .container {
-  width: 600px;
-  max-width: 90%;
+  width: 90%;
+  max-width: 600px;
   text-align: center;
+  padding: 20px;
 }
 
 textarea {
@@ -20,10 +22,11 @@ textarea {
   height: 150px;
   margin-top: 10px;
   padding: 10px;
-  font-size: 16px;
+  font-size: 1rem;
   border-radius: 8px;
   border: none;
   resize: none;
+  box-sizing: border-box;
 }
 
 #speed {
@@ -32,18 +35,20 @@ textarea {
 
 .buttons {
   margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
 }
 
 button {
-  margin: 5px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
+  padding: 12px 24px;
+  font-size: 1rem;
   border: none;
   border-radius: 8px;
   background-color: #1f1f1f;
   color: white;
-  transition: background 0.3s;
+  cursor: pointer;
 }
 
 button:hover {
@@ -52,6 +57,23 @@ button:hover {
 
 #wordDisplay {
   margin-top: 30px;
-  font-size: 48px;
+  font-size: 3rem;
   font-weight: bold;
+  word-wrap: break-word;
+}
+
+/* Mobile tweaks */
+@media (max-width: 500px) {
+  #wordDisplay {
+    font-size: 2.2rem;
+  }
+
+  button {
+    width: 100%;
+    font-size: 1.1rem;
+  }
+
+  textarea {
+    font-size: 1rem;
+  }
 }
