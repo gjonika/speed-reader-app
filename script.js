@@ -1,73 +1,97 @@
-let words = [];
-let index = 0;
-let interval = null;
-let paused = false;
-
-const wordDisplay = document.getElementById("wordDisplay");
-const inputText = document.getElementById("inputText");
-const speedInput = document.getElementById("speed");
-const speedValue = document.getElementById("speedValue");
-
-speedInput.addEventListener("input", () => {
-  speedValue.textContent = speedInput.value;
-});
-
-document.getElementById("startBtn").addEventListener("click", () => {
-  if (!paused) {
-    const text = inputText.value.trim();
-    if (!text) return;
-    words = text.split(/\s+/);
-    index = 0;
-  }
-  paused = false;
-  startReading();
-});
-
-document.getElementById("pauseBtn").addEventListener("click", () => {
-  paused = true;
-  clearInterval(interval);
-});
-
-document.getElementById("resetBtn").addEventListener("click", () => {
-  clearInterval(interval);
-  paused = false;
-  index = 0;
-  wordDisplay.innerHTML = "Ready?";
-});
-
-function startReading() {
-  const delay = 60000 / parseInt(speedInput.value);
-  clearInterval(interval);
-  interval = setInterval(() => {
-    if (index >= words.length) {
-      clearInterval(interval);
-      wordDisplay.innerHTML = "Done!";
-      return;
-    }
-const word = formatWord(words[index++]);
-wordDisplay.innerHTML = word;
-wordDisplay.classList.remove("word-animate");
-void wordDisplay.offsetWidth; // forces reflow so animation restarts
-wordDisplay.classList.add("word-animate");
-  }, delay);
+body {
+  font-family: Arial, sans-serif;
+  background: #121212;
+  color: white;
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-function formatWord(word) {
-  const len = word.length;
-  if (len === 0) return "";
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+}
 
-  let focusIndex = 0;
-  if (len <= 2) {
-    focusIndex = 0;
-  } else if (len === 3) {
-    focusIndex = 1;
-  } else {
-    focusIndex = Math.floor(len / 2 - 1);
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+textarea {
+  width: 100%;
+  height: 100px;
+  padding: 10px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  resize: none;
+  box-sizing: border-box;
+}
+
+#speed {
+  width: 100%;
+}
+
+button {
+  padding: 12px 24px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  background-color: #1f1f1f;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #333;
+}
+
+#wordDisplay {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  font-weight: bold;
+  word-wrap: break-word;
+  text-align: center;
+}
+
+@media (max-width: 500px) {
+  #wordDisplay {
+    font-size: 2.2rem;
   }
 
-  return (
-    word.substring(0, focusIndex) +
-    `<span style="color: red;">${word.charAt(focusIndex)}</span>` +
-    word.substring(focusIndex + 1)
-  );
+  button {
+    width: 100%;
+    font-size: 1.1rem;
+  }
+
+  textarea {
+    font-size: 1rem;
+  }
+}
+
+/* Animation */
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.word-animate {
+  animation: popIn 0.2s ease-out;
 }
