@@ -9,19 +9,25 @@
 <body>
   <div class="container">
     <h1>Speed Reader</h1>
-    <textarea id="inputText" placeholder="Paste your text here..."></textarea>
-    
-    <label for="speed">Speed (WPM): <span id="speedValue">300</span></label>
-    <input type="range" id="speed" min="100" max="1000" value="300" step="50"/>
 
-    <div class="buttons">
-      <button id="startBtn">Start</button>
-      <button id="pauseBtn">Pause</button>
-      <button id="resetBtn">Reset</button>
+    <!-- Wrap controls in a separate section -->
+    <div class="controls">
+      <textarea id="inputText" placeholder="Paste your text here..."></textarea>
+
+      <label for="speed">Speed (WPM): <span id="speedValue">300</span></label>
+      <input type="range" id="speed" min="100" max="1000" value="300" step="50"/>
+
+      <div class="buttons">
+        <button id="startBtn">Start</button>
+        <button id="pauseBtn">Pause</button>
+        <button id="resetBtn">Reset</button>
+      </div>
     </div>
 
+    <!-- Word display stays flex-centered in remaining space -->
     <div id="wordDisplay">Ready?</div>
   </div>
+
   <script src="script.js"></script>
 </body>
 </html>
