@@ -4,23 +4,30 @@ body {
   color: white;
   margin: 0;
   padding: 0;
+  height: 100vh;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;
+  flex-direction: column;
 }
 
 .container {
-  width: 90%;
-  max-width: 600px;
-  text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   padding: 20px;
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.controls {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 textarea {
   width: 100%;
-  height: 150px;
-  margin-top: 10px;
+  height: 100px;
   padding: 10px;
   font-size: 1rem;
   border-radius: 8px;
@@ -34,15 +41,14 @@ textarea {
 }
 
 .buttons {
-  margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
   gap: 10px;
 }
 
 button {
-  padding: 12px 24px;
+  flex: 1;
+  padding: 12px;
   font-size: 1rem;
   border: none;
   border-radius: 8px;
@@ -56,9 +62,13 @@ button:hover {
 }
 
 #wordDisplay {
-  margin-top: 30px;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 3rem;
   font-weight: bold;
+  text-align: center;
   word-wrap: break-word;
 }
 
@@ -69,7 +79,6 @@ button:hover {
   }
 
   button {
-    width: 100%;
     font-size: 1.1rem;
   }
 
@@ -78,6 +87,7 @@ button:hover {
   }
 }
 
+/* Word animation */
 @keyframes popIn {
   0% {
     opacity: 0;
