@@ -44,7 +44,11 @@ function startReading() {
       wordDisplay.innerHTML = "Done!";
       return;
     }
-    wordDisplay.innerHTML = formatWord(words[index++]);
+const word = formatWord(words[index++]);
+wordDisplay.innerHTML = word;
+wordDisplay.classList.remove("word-animate");
+void wordDisplay.offsetWidth; // forces reflow so animation restarts
+wordDisplay.classList.add("word-animate");
   }, delay);
 }
 
